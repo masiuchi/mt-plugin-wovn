@@ -1,0 +1,25 @@
+<mtapp:setting
+  id="user_token"
+  label="<__trans phrase="User Token">"
+  hint="You can see your User Token on <a href="https://wovn.io" target="_blank">WOVN.io</a>."
+  show_hint="1">
+<input type="text" class="text short" name="user_token" value="<mt:var name="user_token">" />
+</mtapp:setting>
+
+<mtapp:setting
+  id="url_pattern"
+  label="<__trans phrase="URL Pattern">">
+<select name="url_pattern">
+  <option value="path">Path</option>
+</select>
+</mtapp:setting>
+
+<mtapp:setting
+  id="defalt_lang"
+  label="<__trans phrase="Default Language">">
+<select name="default_lang">
+  <option value="ja" <mt:if name="default_lang" eq="ja">selected="selected"</mt:if>>Japanese</option>
+  <option value="en" <mt:if name="default_lang" eq="en">selected="selected"</mt:if>>English</option>
+</select>
+</mtapp:setting>
+
