@@ -49,13 +49,20 @@ sub callback {
 
     my $original_html = ${ $params{content} };
 
-    my $values;
-    for ( 1 .. 2 ) {
-        $values = $Plack::Middleware::WOVN::STORE->get_values(
-            $page_url->to_string );
-        if ( $values && ref $values eq 'HASH' && !$values->{expired} ) {
-            last;
+    my $values
+        = ( MT->request('wovn_cache') || {} )->{ $page_url->to_string };
+    if ( !$values || ( ref $values eq 'HASH' && $values->{expired} ) ) {
+        for ( 1 .. 2 ) {
+            $values = $Plack::Middleware::WOVN::STORE->get_values(
+                $page_url->to_string );
+            if ( $values && ref $values eq 'HASH' && !$values->{expired} ) {
+                last;
+            }
         }
+
+        my $wovn_cache = MT->request('wovn_cache') || {};
+        $wovn_cache->{ $page_url->to_string } = $values;
+        MT->request( 'wovn_cache', $wovn_cache );
     }
 
     my @langs;
