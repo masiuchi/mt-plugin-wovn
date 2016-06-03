@@ -21,10 +21,11 @@ sub build_callback {
         return;
     }
 
-    my $plugin = MT->component('WOVN') or return;
-    unless ( $plugin->get_config_value('user_token') ) {
+    my $plugin = MT->component('WOVN');
+    unless ( $plugin && $plugin->get_config_value('user_token') ) {
         return;
     }
+
     $Plack::Middleware::WOVN::STORE ||= Plack::Middleware::WOVN::Store->new(
         {   settings => {
                 user_token   => $plugin->get_config_value('user_token'),
