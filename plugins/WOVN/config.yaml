@@ -24,6 +24,7 @@ settings:
 system_config_template: system_config.tmpl
 
 callbacks:
-  build_page: $WOVN::MT::Plugin::WOVN::callback
-  build_file: $WOVN::MT::Plugin::WOVN::callback
+  init_request: $WOVN::MT::Plugin::WOVN::Callbacks::init_request
+  build_page: $WOVN::MT::Plugin::WOVN::Callbacks::build_callback
+  build_file: $WOVN::MT::Plugin::WOVN::Callbacks::build_callback
 

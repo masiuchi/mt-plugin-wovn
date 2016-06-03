@@ -1,4 +1,4 @@
-package MT::Plugin::WOVN;
+package MT::Plugin::WOVN::Callbacks;
 use strict;
 use warnings;
 
@@ -10,9 +10,11 @@ use Plack::Middleware::WOVN;
 use Plack::Middleware::WOVN::Headers;
 use Plack::Middleware::WOVN::Store;
 
-our $STORE;
+sub init_request {
+    $Plack::Middleware::WOVN::STORE = undef;
+}
 
-sub callback {
+sub build_callback {
     my ( $cb, %params ) = @_;
 
     if ( lc $params{file_info}->url !~ /\.html?$/ ) {
