@@ -32,6 +32,8 @@ sub build_callback {
                 secret_key   => $plugin->get_config_value('secret_key'),
                 url_pattern  => $plugin->get_config_value('url_pattern'),
                 default_lang => $plugin->get_config_value('default_lang'),
+                supported_langs =>
+                    $plugin->get_config_value('supported_langs'),
             }
         }
     );
@@ -73,7 +75,9 @@ sub build_callback {
         @langs = ( $plugin->get_config_value('default_lang') );
     }
     elsif ( $cb->method eq 'build_file' ) {
-        @langs = Plack::Middleware::WOVN::get_langs($values);
+        @langs = @{ $plugin->get_config_value('supported_langs') || [] };
+        @langs
+            = grep { $_ ne $plugin->get_config_value('default_lang') } @langs;
     }
 
     for my $lang (@langs) {

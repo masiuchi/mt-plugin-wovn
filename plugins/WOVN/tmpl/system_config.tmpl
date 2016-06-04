@@ -23,3 +23,21 @@
 </select>
 </mtapp:setting>
 
+<mtapp:setting
+  id="supported_langs"
+  label="<__trans phrase="Supported Languages">">
+<ul class="fixed-width multiple-selection">
+  <mt:loop name="supported_langs">
+  <li>
+    <input
+      type="checkbox"
+      id="supported-lang-<mt:var name="code">"
+      name="supported_langs"
+      value="<mt:var name="code">"
+      <mt:if name="enabled">checked="checked"</mt:if> />
+    <label for="supported-lang-<mt:var name="code">"><mt:var name="label"></label>
+  </li>
+  </mt:loop>
+</ul>
+</mtapp:setting>
+
