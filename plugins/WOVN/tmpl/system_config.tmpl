@@ -18,8 +18,9 @@
   id="defalt_lang"
   label="<__trans phrase="Default Language">">
 <select name="default_lang">
-  <option value="ja" <mt:if name="default_lang" eq="ja">selected="selected"</mt:if>>Japanese</option>
-  <option value="en" <mt:if name="default_lang" eq="en">selected="selected"</mt:if>>English</option>
+  <mt:loop name="supported_langs">
+  <option value="<mt:var name="code">" <mt:if name="code" eq="$default_lang">selected="selected"</mt:if>><mt:var name="label"></option>
+  </mt:loop>
 </select>
 </mtapp:setting>
 
